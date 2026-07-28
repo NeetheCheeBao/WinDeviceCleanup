@@ -131,3 +131,7 @@ gh repo clone NeetheCheeBao/WinDeviceCleanup
 3. **SetupAPI** `SetupDiRemoveDevice` — 直接 Win32 API 调用，绕过 PnP 管理器锁定
 4. `reg.exe delete` — 强制删除注册表键
 5. `devcon.exe remove` — 若系统或脚本目录中存在
+
+## ⚖️ 许可证
+
+本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件。
