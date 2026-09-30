@@ -71,7 +71,7 @@ namespace WdcShell
             {
                 ApplyWindowTitle();
                 SetStatus("准备扫描", "W32Faint");
-                SetStatusBar("就绪");
+                SetStatusBar("NeetheCheeBao");
             };
 
             AppState.Window.Closing += delegate
