@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>WinDeviceCleanup</AssemblyName>
+    <RootNamespace>WinDeviceCleanup</RootNamespace>
+    <Product>Windows Ghost Device Cleanup</Product>
+    <AssemblyTitle>WindowsGhostDeviceCleanup</AssemblyTitle>
+    <Version>2.0.0</Version>
+    <Company>NeetheCheeBao</Company>
+    <Copyright>MIT License</Copyright>
+    <!-- 单文件零依赖：.NET Framework 4.8 与 PowerShell 5.1 均为 Windows 自带 -->
+    <DebugType>none</DebugType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- 请求管理员权限：移除 PnP 设备必需 -->
+    <ApplicationManifest>App\app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\assets\icon.ico</ApplicationIcon>
+    <!-- 不生成 exe.config，保持发布产物为单文件 -->
+    <GenerateBindingRedirectsOutputType>false</GenerateBindingRedirectsOutputType>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <!--
+    PowerShell 引擎引用。
+    它随 Windows PowerShell 5.1 提供（位于 GAC），因此不需要打包或 NuGet。
+    不同系统上 GAC 的版本号目录名可能不同，这里按候选顺序探测。
+  -->
+  <PropertyGroup>
+    <PshGacDir>$(WINDIR)\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation</PshGacDir>
+    <PshAsm Condition="Exists('$(PshGacDir)\v4.0_3.0.0.0__31bf3856ad364e35\System.Management.Automation.dll')">$(PshGacDir)\v4.0_3.0.0.0__31bf3856ad364e35\System.Management.Automation.dll</PshAsm>
+    <PshAsm Condition="'$(PshAsm)'=='' AND Exists('$(PshGacDir)\v4.0_1.0.0.0__31bf3856ad364e35\System.Management.Automation.dll')">$(PshGacDir)\v4.0_1.0.0.0__31bf3856ad364e35\System.Management.Automation.dll</PshAsm>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Management.Automation">
+      <HintPath Condition="'$(PshAsm)'!=''">$(PshAsm)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- 界面定义：以内嵌资源方式打入 exe，运行时由 XamlReader 加载 -->
+  <ItemGroup>
+    <EmbeddedResource Include="App\MainWindow.xaml" LogicalName="MainWindow.xaml" />
+    <!-- 同时作为 WPF 资源嵌入，供 Window.Icon 通过 pack URI 引用（单文件分发下无散文件） -->
+    <Resource Include="..\assets\icon.ico" Link="icon.ico" />
+  </ItemGroup>
+
+  <!-- 找不到 PowerShell 程序集时给出明确提示 -->
+  <Target Name="CheckPowerShellRef" BeforeTargets="ResolveAssemblyReferences">
+    <Warning Condition="'$(PshAsm)'==''"
+             Text="未能在 GAC 中找到 System.Management.Automation.dll。需要 Windows PowerShell 5.1（Windows 10/11 自带）。" />
+  </Target>
+
+</Project>
