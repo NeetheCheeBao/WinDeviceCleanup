@@ -2,6 +2,8 @@
 
 # Windows Ghost Device Cleanup
 
+<img src="assets\icon.ico" width="128" alt="logo" />
+
 [![Platform](https://img.shields.io/badge/Platform-Windows_10%2F11-blue.svg)](https://www.microsoft.com/windows)
 [![Runtime](https://img.shields.io/badge/.NET_Framework-4.8-blueviolet.svg)](https://dotnet.microsoft.com/download/dotnet-framework)
 [![Language](https://img.shields.io/badge/Language-C%23-239120.svg)](https://learn.microsoft.com/dotnet/csharp/)
