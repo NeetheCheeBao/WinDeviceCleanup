@@ -8,7 +8,7 @@
 [![Runtime](https://img.shields.io/badge/.NET_Framework-4.8-blueviolet.svg)](https://dotnet.microsoft.com/download/dotnet-framework)
 [![Language](https://img.shields.io/badge/Language-C%23-239120.svg)](https://learn.microsoft.com/dotnet/csharp/)
 [![UI](https://img.shields.io/badge/UI-WPF-purple.svg)](https://learn.microsoft.com/dotnet/desktop/wpf/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 > 本项目由 Uwe Sieber 原版 [Device Cleanup Tool](https://www.uwe-sieber.de/misc_tools_e.html) 的改进与重新设计版本，采用现代 GUI 重制
 
@@ -193,4 +193,4 @@ Project
 
 ## ⚖️ 许可证
 
-本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件
+本项目采用 GNU General Public License v3.0 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件
